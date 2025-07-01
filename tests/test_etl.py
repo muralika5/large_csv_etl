@@ -5,6 +5,7 @@ import pandas as pd
 
 from etl_csv_parser.csv import CSVProcessor
 from etl_csv_parser.db_loader import DatabaseLoader
+from etl_csv_parser.etl_pipeline import ETLPipeline
 
 
 class TestETLPipeline:
@@ -73,3 +74,21 @@ class TestETLPipeline:
         self.cur.execute(f'SELECT COUNT(*) FROM {self.table_name}')
         count = self.cur.fetchone()[0]
         assert count == 2
+
+    def test_etl_pipeline(self):
+        pipeline = ETLPipeline(
+            csv_path=self.sample_csv,
+            db_loader=DatabaseLoader(self.temp_db)
+        )
+        pipeline.run(output_csv_path=self.output_csv)
+        # Check if output CSV was created
+        assert os.path.exists(self.output_csv)
+        # Check row count in output CSV
+        output_df = pd.read_csv(self.output_csv)
+        assert len(output_df) == 2
+        # Check if data was inserted into DB
+        self.cur.execute(f'SELECT COUNT(*) FROM {self.table_name}')
+        count = self.cur.fetchone()[0]
+        assert count == 2
+        # Check if processed_at column exists
+        assert 'processed_at' in output_df.columns
