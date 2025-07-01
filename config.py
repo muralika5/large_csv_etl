@@ -14,6 +14,8 @@ CHUNK_SIZE = 100_000
 # Directory to store temporary chunk files
 TEMP_DIR = 'temp_chunks'
 
+OUTPUT_CSV_PATH = 'output/output.csv'
+
 # Create and makes srue temp directory exists
 os.makedirs(TEMP_DIR, exist_ok=True)
 

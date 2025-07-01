@@ -1,0 +1,5 @@
+transaction_id,user_id,amount,timestamp,status
+1,100,50.0,2024-06-01T10:00:00,Success
+2,101,-10.0,2024-06-01T10:05:00,Success
+3,102,20.0,2024-06-01T10:10:00,Cancelled
+4,103,30.0,2024-06-01T10:15:00,Pending
