@@ -1,12 +1,11 @@
 import os
-from datetime import datetime, timezone, timedelta
-
+from datetime import timedelta, timezone
 
 # Path to the final processed CSV file
 PROCESSED_CSV_PATH = 'processed_output.csv'
 
 # Path to the SQLite database file
-DB_PATH =  os.getenv('DB_PATH', 'etl_database.db')
+DB_PATH = os.getenv('DB_PATH', 'etl_database.db')
 
 # Chunk size for reading the CSV
 CHUNK_SIZE = 100_000

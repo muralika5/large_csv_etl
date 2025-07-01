@@ -12,5 +12,8 @@ dump.rdb
 aa.py
 .vscode/
 *.log
+*.db
+output/
+temp_chunks/
 
 

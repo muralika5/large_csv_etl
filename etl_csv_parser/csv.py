@@ -1,8 +1,10 @@
-import os
-import pandas as pd
 import logging
+import os
 from datetime import datetime
-from config import CHUNK_SIZE, TEMP_DIR, IST
+
+import pandas as pd
+
+from config import CHUNK_SIZE, IST, TEMP_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +20,7 @@ class CSVProcessor:
         try:
             status = str(row['status']).lower()
             amount = float(row['amount'])
-            #todo: can add more validations like checking if transaction id is unique or not querying the db
+            # todo: can add more validations like checking if transaction id is unique or not querying the db
             if amount < 0 or status == 'cancelled':
                 return False
             return True
@@ -66,4 +68,4 @@ class CSVProcessor:
                         fin.readline()
                     for line in fin:
                         fout.write(line)
-        logger.info(f"[CSVProcessor] Concatenated {len(temp_files)} temp files into {output_file}") 
+        logger.info(f"[CSVProcessor] Concatenated {len(temp_files)} temp files into {output_file}")

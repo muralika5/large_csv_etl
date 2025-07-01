@@ -1,5 +1,7 @@
 import sqlite3
+
 from config import DB_PATH
+
 
 def create_table():
     conn = sqlite3.connect(DB_PATH)
@@ -16,4 +18,5 @@ def create_table():
     ''')
     conn.commit()
     conn.close()
-    # we can also have another table to store file metadata and have a file id in transactions table. Considering that out of scope
+    # we can also have another table to store file metadata and have a file id in transactions table.
+    # Considering that out of scope

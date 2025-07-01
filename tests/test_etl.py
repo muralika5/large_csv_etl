@@ -1,8 +1,11 @@
 import os
-import pandas as pd
 import sqlite3
+
+import pandas as pd
+
 from etl_csv_parser.csv import CSVProcessor
 from etl_csv_parser.db_loader import DatabaseLoader
+
 
 class TestETLPipeline:
     sample_csv = 'tests/sample_input.csv'
@@ -69,4 +72,4 @@ class TestETLPipeline:
         # Check row count (should be 2: only valid rows from sample_input.csv)
         self.cur.execute(f'SELECT COUNT(*) FROM {self.table_name}')
         count = self.cur.fetchone()[0]
-        assert count == 2 
+        assert count == 2
