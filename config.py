@@ -14,9 +14,13 @@ CHUNK_SIZE = 100_000
 # Directory to store temporary chunk files
 TEMP_DIR = 'temp_chunks'
 
-OUTPUT_CSV_PATH = 'output/output.csv'
+OUTPUT_DIR = 'output'
+
+OUTPUT_CSV_PATH = f'{OUTPUT_DIR}/output.csv'
+
 
 # Create and makes srue temp directory exists
 os.makedirs(TEMP_DIR, exist_ok=True)
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 IST = timezone(timedelta(hours=5, minutes=30))
