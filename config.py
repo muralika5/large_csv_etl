@@ -1,4 +1,6 @@
 import os
+from datetime import datetime, timezone, timedelta
+
 
 # Path to the final processed CSV file
 PROCESSED_CSV_PATH = 'processed_output.csv'
@@ -14,3 +16,5 @@ TEMP_DIR = 'temp_chunks'
 
 # Create and makes srue temp directory exists
 os.makedirs(TEMP_DIR, exist_ok=True)
+
+IST = timezone(timedelta(hours=5, minutes=30))
