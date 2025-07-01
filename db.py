@@ -6,7 +6,7 @@ from config import DB_PATH
 def create_table():
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
-    cur.execute(f'''
+    cur.execute('''
         CREATE TABLE IF NOT EXISTS transactions (
             transaction_id TEXT PRIMARY KEY,
             user_id TEXT,

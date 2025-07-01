@@ -22,7 +22,7 @@ class TestETLPipeline:
         # Setup DB connection
         self.conn = sqlite3.connect(self.temp_db)
         self.cur = self.conn.cursor()
-                # Create table
+        # Create table
         self.cur.execute(f'''
             CREATE TABLE IF NOT EXISTS {self.table_name} (
                 transaction_id TEXT PRIMARY KEY,

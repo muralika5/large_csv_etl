@@ -18,7 +18,7 @@ class DatabaseLoader:
             # we shall ignore the duplicate entries.
             # Hence not committing the transaction in an atomic block
             cur.executemany(
-                f'''
+                '''
                 INSERT OR IGNORE INTO transactions (transaction_id, user_id, amount, timestamp, status, processed_at)
                 VALUES (?, ?, ?, ?, ?, ?)
                 ''',

@@ -43,10 +43,10 @@ class ETLPipeline:
         else:
             temp_files = [temp_file_map[idx] for idx in sorted(temp_file_map)]
         return temp_files, errors
-        
+
     def run(self, output_csv_path=OUTPUT_CSV_PATH):
         logger.info('[ETLPipeline] Starting ETL pipeline')
-        
+
         ordered_temp_files, errors = self._transform()
         if ordered_temp_files:
             self._concatenate(output_csv_path, ordered_temp_files)
@@ -55,7 +55,7 @@ class ETLPipeline:
                 self.db_loader.batch_insert(output_csv_path)
             except Exception as e:
                 logger.error(f'[ETLPipeline] Error during batch insert, you may have to retry: {e}')
-            # Although isolating the above logic would make the batch_insert re parse the entire 
+            # Although isolating the above logic would make the batch_insert re parse the entire
             # file, but it makes the debugging/retry easier and any DB errors won't affect file concatenation
             logger.info('[ETLPipeline] ETL pipeline completed.')
         if errors:
