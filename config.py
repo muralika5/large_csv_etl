@@ -1,8 +1,6 @@
 import os
 from datetime import timedelta, timezone
 
-# Path to the final processed CSV file
-PROCESSED_CSV_PATH = 'processed_output.csv'
 
 # Path to the SQLite database file
 DB_PATH = os.getenv('DB_PATH', 'etl_database.db')
