@@ -24,7 +24,6 @@ def main():
         csv_path=args.input_file,
         db_loader=db_loader,
         chunk_size=args.batch_size,
-        temp_dir=TEMP_DIR
     )
     pipeline.run(output_csv_path=args.output_file)
 

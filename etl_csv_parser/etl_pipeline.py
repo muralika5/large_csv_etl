@@ -9,8 +9,8 @@ logger = logging.getLogger(__name__)
 
 
 class ETLPipeline:
-    def __init__(self, csv_path, db_loader: DatabaseLoader, chunk_size=CHUNK_SIZE, temp_dir=TEMP_DIR):
-        self.csv_processor = CSVProcessor(csv_path, chunk_size, temp_dir)
+    def __init__(self, csv_path, db_loader: DatabaseLoader, chunk_size=CHUNK_SIZE):
+        self.csv_processor = CSVProcessor(csv_path, chunk_size)
         self.db_loader = db_loader
 
     def _concatenate(self, output_csv_path, ordered_temp_files):
@@ -19,6 +19,7 @@ class ETLPipeline:
         """
         self.csv_processor.concatenate(output_csv_path, temp_files=ordered_temp_files)
         logger.info('[ETLPipeline] Output file concatenation completed.')
+        self.csv_processor.clean_temp_files()
 
     def _transform(self):
         """

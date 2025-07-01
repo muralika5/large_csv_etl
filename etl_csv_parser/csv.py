@@ -1,6 +1,7 @@
 import logging
 import os
 from datetime import datetime
+import shutil
 
 import pandas as pd
 
@@ -10,11 +11,10 @@ logger = logging.getLogger(__name__)
 
 
 class CSVProcessor:
-    def __init__(self, input_csv, chunk_size=CHUNK_SIZE, temp_dir=TEMP_DIR):
+    def __init__(self, input_csv, chunk_size=CHUNK_SIZE):
         self.input_csv = input_csv
         self.chunk_size = chunk_size
-        self.temp_dir = temp_dir
-        os.makedirs(self.temp_dir, exist_ok=True)
+        os.makedirs(TEMP_DIR, exist_ok=True)
 
     def validate_row(self, row):
         try:
@@ -39,13 +39,21 @@ class CSVProcessor:
         valid_chunk['processed_at'] = datetime.now(IST).isoformat()
         return valid_chunk
 
+    @staticmethod
+    def clean_temp_files():
+        """
+        Clean up temporary files created during processing.
+        """
+        shutil.rmtree(TEMP_DIR, ignore_errors=True)
+        os.makedirs(TEMP_DIR)
+
     def process_chunk(self, chunk, chunk_idx):
         try:
             cleaned = self.clean_chunk(chunk)
             if cleaned.empty:
                 logger.info(f"[CSVProcessor] Chunk {chunk_idx} is empty after cleaning. Skipping.")
                 return None
-            temp_file = os.path.join(self.temp_dir, f'chunk_{chunk_idx}.csv')
+            temp_file = os.path.join(TEMP_DIR, f'chunk_{chunk_idx}.csv')
             cleaned.to_csv(temp_file, index=False)
             logger.info(f"[CSVProcessor] Processed and wrote chunk {chunk_idx} to {temp_file} ({len(cleaned)} rows)")
             return temp_file
