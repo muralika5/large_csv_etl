@@ -16,4 +16,4 @@ def create_table():
     ''')
     conn.commit()
     conn.close()
-
+    # we can also have another table to store file metadata and have a file id in transactions table. Considering that out of scope

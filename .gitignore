@@ -4,19 +4,13 @@
 .idea/**
 scripts/**
 **/.mypy_cache/**
-tags
-local_variables.py
-local_variables.sh
 venv/
 .DS_Store
 dump.rdb
-celerybeat-schedule.db
 **.swp
 **.swo
 aa.py
 .vscode/
 *.log
-tmp
-lala*
-tmp.txt
+
 

@@ -18,6 +18,7 @@ class CSVProcessor:
         try:
             status = str(row['status']).lower()
             amount = float(row['amount'])
+            #todo: can add more validations like checking if transaction id is unique or not querying the db
             if amount < 0 or status == 'cancelled':
                 return False
             return True

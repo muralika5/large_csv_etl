@@ -13,6 +13,7 @@ class DatabaseLoader:
         cur = conn.cursor()
         for chunk in pd.read_csv(processed_csv, chunksize=batch_size):
             tuples = [tuple(row) for row in chunk.values]
+            # Assuming data in the file are in its final state and will not be updated, to acheive idempotency, we shall ignore the duplicate entries
             cur.executemany(
                 f'''INSERT OR IGNORE INTO transactions (transaction_id, user_id, amount, timestamp, status, processed_at)
                     VALUES (?, ?, ?, ?, ?, ?)''',
